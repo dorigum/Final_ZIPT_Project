@@ -1,0 +1,101 @@
+.stateButton01 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 11px;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--r-sm);
+  border: none;
+  text-align: left;
+  background: var(--state-button01-background);
+  color: var(--state-button01-color);
+  transition: all .14s;
+  font-family: inherit;
+}
+
+.stateText01 {
+  font-size: 13.5px;
+  font-weight: var(--state-text01-font-weight);
+  white-space: nowrap;
+}
+
+.mobileHeaderAccountActions {
+  display: none;
+  
+  @media (max-width: 760px) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 4px;
+    margin-left: auto;
+  }
+}
+
+.mobileLoginTextBtn {
+  background: none;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-2);
+  padding: 6px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.mobileSignupTextBtn {
+  background: var(--primary-soft);
+  border: none;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary-700);
+  padding: 6px 11px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.14s;
+  
+  &:hover {
+    background: var(--primary-soft-2);
+  }
+}
+
+.mobileLogoutBtn {
+  background: none;
+  border: none;
+  color: var(--ink-2);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.14s, color 0.14s;
+  
+  &:hover {
+    background: var(--surface-2);
+    color: var(--danger);
+  }
+}
+
+.mobileProfileNameBtn {
+  background: none;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 6px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  
+  &:hover {
+    color: var(--primary);
+  }
+}

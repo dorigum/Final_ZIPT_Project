@@ -1,0 +1,16 @@
+.ring { position: relative; width: var(--ring-size); height: var(--ring-size); }
+.svg {
+  transform-origin: center;
+  animation: zipt-spin 1.7s linear infinite;
+}
+.progress { transition: stroke-dashoffset 1s cubic-bezier(.4, 0, .2, 1); }
+.content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+@keyframes zipt-spin {
+  from { transform: rotate(-90deg); }
+  to { transform: rotate(270deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svg { animation: none; transform: rotate(-90deg); }
+}

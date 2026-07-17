@@ -1,0 +1,10 @@
+아래는 OCR로 추출한 주택임대차계약서 텍스트와, 계약서 이미지에서 별도로 추출한 체크박스 선택 결과다.
+체크리스트 생성을 위해 필요한 정보만 구조화하라.
+
+체크박스가 있는 항목은 VISION_CHECKBOX_JSON을 참고하여 구조화한다.
+
+[OCR_TEXT]
+{ocrText}
+
+[VISION_CHECKBOX_JSON]
+{visionJson}

@@ -1,0 +1,12 @@
+package com.zipt.domain.contract.entity;
+
+public enum SpecialTermType {
+    MOVE_IN_REPORT_AND_FIXED_DATE,
+    MORTGAGE_RESTRICTION,
+    CONTRACT_TERMINATION_BY_TAX_OR_PRIORITY,
+    DISPUTE_MEDIATION,
+    RECONSTRUCTION,
+    DETAILED_ADDRESS,
+    CUSTOM,
+    UNKNOWN
+}

@@ -1,0 +1,14 @@
+.card {
+  padding: var(--card-padding);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--sh-sm);
+  transition: box-shadow .18s, transform .18s, border-color .18s;
+}
+.clickable { cursor: pointer; }
+.hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-2);
+  box-shadow: var(--sh-lg);
+}

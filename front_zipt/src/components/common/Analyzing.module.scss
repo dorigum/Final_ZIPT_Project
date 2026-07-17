@@ -1,0 +1,105 @@
+.wrapper {
+  max-width: 480px;
+  margin: 40px auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ringWrap {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+.subtitle {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  margin-top: 5px;
+}
+
+.statusText {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  margin-top: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-700);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.errorText {
+  margin-top: 10px;
+  color: var(--danger, #d32f2f);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.stageList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.stageRow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 16px;
+  border-radius: var(--r-md);
+  background: var(--stage-row-background);
+  border: var(--stage-row-border);
+  opacity: var(--stage-row-opacity);
+  transition: all .3s;
+}
+
+.stageIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--stage-icon-background);
+  transition: background-color .3s;
+}
+
+.stageText {
+  flex: 1;
+}
+
+.stageTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--stage-title-color);
+}
+
+.stageSub {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.sparkleIcon {
+  animation: sparklePulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes sparklePulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.22) rotate(15deg); opacity: 0.75; }
+}

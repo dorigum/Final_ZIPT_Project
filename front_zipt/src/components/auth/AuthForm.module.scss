@@ -1,0 +1,350 @@
+.authPage {
+  min-height: calc(100vh - 220px);
+  display: grid;
+  place-items: center;
+  padding: 24px 0 48px;
+}
+
+.authShell {
+  width: min(100%, 920px);
+  min-height: 580px;
+  height: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--sh-md);
+}
+
+.intro {
+  padding: 38px 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  background:
+    linear-gradient(135deg, rgba(30, 58, 138, .94), rgba(42, 107, 230, .9)),
+    linear-gradient(45deg, rgba(255,255,255,.14) 25%, transparent 25% 50%, rgba(255,255,255,.12) 50% 75%, transparent 75%);
+  color: #fff;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.brandMark {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,.18);
+  color: #fff;
+}
+
+.introTitle {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.introCopy {
+  margin: 12px 0 0;
+  max-width: 360px;
+  color: rgba(255,255,255,.82);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.introList {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(255,255,255,.86);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.panel {
+  padding: 36px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+  transition: border-color .18s, box-shadow .18s, background-color .18s;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(42, 107, 230, .12);
+}
+
+.input::placeholder {
+  color: var(--ink-4);
+}
+
+.error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.submit {
+  height: 48px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: var(--sh-primary);
+  transition: background-color .18s, transform .18s, box-shadow .18s;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: .62;
+  box-shadow: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+  color: var(--ink-4);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+
+.snsGroup {
+  display: grid;
+  gap: 9px;
+}
+
+.snsButton {
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 800;
+  transition: border-color .18s, background-color .18s, transform .18s;
+}
+
+.snsButton:hover {
+  border-color: var(--primary-soft-2);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.kakao {
+  border-color: #fee500;
+  background: #fee500;
+  color: #191919;
+}
+
+.naver {
+  border-color: #03c75a;
+  background: #03c75a;
+  color: #fff;
+}
+
+.google {
+  background: #fff;
+}
+
+.footerText {
+  margin: 18px 0 0;
+  color: var(--ink-3);
+  font-size: 13px;
+  text-align: center;
+}
+
+.footerLink {
+  color: var(--primary-700);
+  font-weight: 900;
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10, 20, 40, .45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: zipt-fade .18s ease;
+}
+
+.successModal {
+  width: min(100%, 420px);
+  padding: 34px 30px 30px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2xl);
+  background: var(--surface);
+  box-shadow: 0 20px 40px rgba(15, 27, 51, .16);
+  text-align: center;
+  animation: zipt-pop .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--safe-soft);
+  color: var(--safe-600);
+}
+
+.modalTitle {
+  margin: 0;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.35;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.modalCopy {
+  margin: 12px auto 0;
+  max-width: 320px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+.modalButton {
+  width: 100%;
+  height: 52px;
+  margin-top: 26px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: var(--sh-primary);
+  transition: background-color .18s, transform .18s, box-shadow .18s;
+}
+
+.modalButton:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+}
+@media (max-width: 860px) {
+  .authShell {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    padding: 28px;
+    gap: 20px;
+  }
+
+  .introList {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .authPage {
+    padding-top: 8px;
+  }
+
+  .authShell {
+    border-radius: 0;
+    border-inline: 0;
+  }
+
+  .panel {
+    padding: 28px 20px;
+  }
+
+  .introTitle {
+    font-size: 24px;
+  }
+}
+

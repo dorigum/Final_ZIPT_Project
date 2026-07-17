@@ -1,0 +1,38 @@
+# IDE
+.idea/
+.vscode/
+
+# 노트 도구
+.obsidian/
+
+# pnpm store
+.pnpm-store/
+
+# 빌드 결과물
+dist/
+build/
+
+# 환경변수
+.env
+.env.local
+.env.*.local
+
+# 의존성
+node_modules/
+
+# 로그
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Standalone 및 임시 HTML 빌드본
+ZIPT*.html
+ZIPT (standalone).html
+ZIPT.html
+
+# 로컬 테스트용 샘플 서류 (커밋 금지)
+test-fixtures/

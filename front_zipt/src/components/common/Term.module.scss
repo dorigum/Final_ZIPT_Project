@@ -1,0 +1,7 @@
+.term { position: relative; display: inline-block; }
+.word { padding-bottom: 1px; border-bottom: 2px dotted var(--primary-soft-2); color: var(--primary-700); font-weight: 700; cursor: help; }
+.tooltip { position: absolute; bottom: calc(100% + 10px); left: 50%; z-index: 50; width: 280px; padding: 13px 15px; transform: translateX(-50%); border-radius: var(--r-md); background: var(--navy-deep); color: #fff; box-shadow: var(--sh-lg); animation: zipt-pop .16s ease; text-align: left; cursor: default; }
+.heading { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; color: #9fc0ff; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+.easy { display: block; margin-bottom: 7px; font-size: 13.5px; font-weight: 600; line-height: 1.5; }
+.tip { display: block; padding-top: 7px; border-top: 1px solid rgba(255, 255, 255, .14); color: #c5d4ee; font-size: 12.5px; line-height: 1.5; }
+.arrow { position: absolute; top: 100%; left: 50%; width: 0; height: 0; transform: translateX(-50%); border-right: 7px solid transparent; border-left: 7px solid transparent; border-top: 8px solid var(--navy-deep); }

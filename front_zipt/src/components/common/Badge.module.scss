@@ -1,0 +1,22 @@
+.badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 5px;
+  border-radius: var(--r-pill);
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.sm { padding: 3px 9px; font-size: 11.5px; }
+.md { padding: 5px 11px; font-size: 12.5px; }
+.neutral { --badge-bg: var(--surface-3); --badge-fg: var(--ink-2); }
+.primary { --badge-bg: var(--primary-soft); --badge-fg: var(--primary-700); }
+.safe { --badge-bg: var(--safe-soft); --badge-fg: var(--safe-600); }
+.warn { --badge-bg: var(--warn-soft); --badge-fg: var(--warn-600); }
+.danger { --badge-bg: var(--danger-soft); --badge-fg: var(--danger-600); }
+.guide { --badge-bg: #ecebfa; --badge-fg: #5b53c9; }
+.solid { background: var(--badge-fg); color: #fff; }

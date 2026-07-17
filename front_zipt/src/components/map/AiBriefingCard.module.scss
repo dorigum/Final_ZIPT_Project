@@ -1,0 +1,104 @@
+.aiCardShell {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(42, 107, 230, 0.92));
+  border-radius: var(--r-xl);
+  padding: 18px 22px;
+  color: #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(30, 58, 138, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: zipt-fade 0.3s ease;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aiBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.refreshBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--r-pill);
+  padding: 5px 12px;
+  color: #e6edfa;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.contentBox {
+  background: rgba(15, 27, 51, 0.3);
+  border-radius: var(--r-lg);
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.summaryText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #f0f4ff;
+  font-weight: 500;
+  white-space: pre-wrap;
+}
+
+.loadingSkeleton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #9fc0ff;
+  font-weight: 600;
+}
+
+.spinnerIcon {
+  font-size: 18px;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}

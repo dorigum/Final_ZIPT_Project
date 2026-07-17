@@ -1,0 +1,4 @@
+다음 OCR 텍스트의 문서 유형을 판별하라.
+
+[OCR_TEXT]
+{ocrText}

@@ -1,0 +1,117 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.15'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id "io.sentry.jvm.gradle" version "6.14.0"
+}
+
+group = 'com.zipt'
+version = '0.0.1-SNAPSHOT'
+description = 'back_zipt'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springAiVersion', "1.1.8")
+}
+
+// RAG 시점에 아래 블록 추가
+ dependencyManagement {
+     imports {
+         mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+     }
+ }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' //ocr, 국토부, API
+    // Spring Security + OAuth2
+    //implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // oauth2-client: 카카오 / 구글 / 네이버 SNS 로그인
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly     'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly    'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // DB0: JWT Refresh Token + 로그아웃 블랙리스트
+    // DB1: 시세 API / 층간소음 API 결과 캐싱 (1시간 TTL)
+
+    // AWS S3
+    implementation platform('software.amazon.awssdk:bom:2.36.3')
+    implementation 'software.amazon.awssdk:s3'
+    // zipt-files:    등기부등본 / 계약서 이미지 업로드
+    // zipt-frontend: React 빌드 파일 (CloudFront 연결)
+
+    // PDF 생성 (오혜진)
+    implementation 'com.itextpdf:itext7-core:8.0.3'
+    // 분석 리포트 PDF 생성 → S3 업로드 → presigned URL 반환
+
+    // 임베딩 AI
+    implementation 'org.springframework.ai:spring-ai-bedrock'
+
+
+    // PGVector (RAG)
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
+    runtimeOnly 'org.postgresql:postgresql'
+
+
+    // 모니터링
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    // /actuator/health, /actuator/prometheus 엔드포인트 노출
+    // Prometheus + Grafana 대시보드 연동
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8'
+    // http://localhost:8080/swagger-ui/index.html
+
+    // AWS BEDROCK API
+    implementation 'org.springframework.ai:spring-ai-starter-model-bedrock-converse'
+
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'com.h2database:h2'
+    //testImplementation 'org.springframework.security:spring-security-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+sentry {
+    // Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry.
+    // This enables source context, allowing you to see your source
+    // code as part of your stack traces in Sentry.
+    includeSourceContext = true
+
+    org = "zipt"
+    projectName = "java-spring-boot"
+    authToken = System.getenv("SENTRY_AUTH_TOKEN")
+}

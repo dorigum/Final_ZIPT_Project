@@ -1,0 +1,96 @@
+﻿spring:
+  application:
+    name: back_zipt
+  profiles:
+    active: dev          # 濡쒖뺄 媛쒕컻 ??dev / 諛고룷 ??prod濡?蹂寃?/ H2 ?뚯뒪??local
+  #ocr ?뚯씪 ?ш린 ?섎┝
+  config:
+    import: "optional:classpath:application-dev.yml"
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  datasource:
+    hikari:
+      leak-detection-threshold: 2000
+      maximum-pool-size: 20
+      connection-timeout: 30000
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  # pgvector 而ㅼ뒪? vectorstore ?ъ슜???꾪빐 exclude
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+
+# CORS
+cors:
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}
+
+# AWS S3 & Cloud
+cloud:
+  aws:
+    region:
+      static: ${AWS_REGION:ap-northeast-2}
+    credentials:
+      access-key: ${AWS_ACCESS_KEY:}
+      secret-key: ${AWS_SECRET_KEY:}
+    s3:
+      bucket-files: ${S3_BUCKET_FILES:zipt-files}
+
+# Actuator 紐⑤땲?곕쭅
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# Swagger
+springdoc:
+  swagger-ui:
+    path: /api/swagger-ui.html
+  api-docs:
+    path: /api/v3/api-docs
+  webjars:
+    prefix: /api/webjars            # UI媛 濡쒕뱶?섎뒗 由ъ냼?ㅻ룄 /api 諛묒쑝濡?
+
+#痢듦컙?뚯쓬
+#app:
+#  environment:
+#    api-key: ${NOISE_API_KEY:}
+#    api-url: ${NOISE_API_URL:}
+
+zipt:
+  terms:
+    s3-key: seed/terms.json
+    admin-token: ${ZIP_ADMIN_TOKEN:change-me}
+  guides:
+    s3-key: seed/guides.json
+    seed-location: classpath:seed/guides.json
+    admin-token: ${ZIP_ADMIN_TOKEN:change-me}
+  # Redis ?ㅼ젙
+  redis:
+    cache-database: 1
+    blacklist-database: 0
+
+# JWT - 20260629 ?숉쁺 (怨듯넻 yml濡?愿由?- dev, prod)
+jwt:
+  secret: ${JWT_SECRET:change-me-to-a-long-random-32byte-min-secret}
+  expiration: 720000000
+
+# pool-size ?섎┝
+
+

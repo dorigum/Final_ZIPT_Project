@@ -1,0 +1,63 @@
+# ════════════════════════════════════════════
+# ZIPT 프론트엔드 배포
+# 트리거: dev 브랜치 push (일단테스트 오혜진 브랜치)
+# ════════════════════════════════════════════
+
+name: Front Deploy
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Node 20 설정
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. 빌드 (VITE_API_BASE_URL → CloudFront 주소로 주입)
+      - name: Build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_URL }}/api
+          VITE_KAKAO_MAP_KEY: ${{ secrets.VITE_KAKAO_MAP_KEY }} # 카카오맵 추가
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }} #제미나이 추가
+        run: npm run build
+
+      # 5. AWS 자격증명 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      # 6. S3 업로드
+      - name: Deploy to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_FRONTEND }} \
+            --delete \
+            --cache-control "public, max-age=31536000" \
+            --exclude "index.html"
+          aws s3 cp dist/index.html s3://${{ secrets.S3_BUCKET_FRONTEND }}/index.html \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+      # 7. CloudFront 캐시 무효화
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"

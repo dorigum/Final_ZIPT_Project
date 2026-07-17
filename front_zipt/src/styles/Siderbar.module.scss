@@ -1,0 +1,246 @@
+@use './variables' as *;
+
+// 💡 혹시 variables.scss에 아래 변수들이 없어서 터지는 걸 방지하기 위한 안전장치 (기본값 설정)
+// $header-height: 60px !default;
+$header-height: 70px !default; 
+$sidebar-width: 240px !default;
+$sidebar-width-collapsed: 70px !default;
+$breakpoint-lg: 992px !default;
+$z-sticky: 1020 !default;
+$z-modal: 1050 !default;
+$white: #fff !default;
+$gray: #6c757d !default;
+$light-gray: #dee2e6 !default;
+$border-color: #e9ecef !default;
+$border: 1px solid $border-color !default;
+$border-width: 1px !default;
+$border-radius: 8px !default;
+$space-sm: 8px !default;
+$space-md: 12px !default;
+$space-lg: 16px !default;
+$font-size-xs: 12px !default;
+$font-size-sm: 14px !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$primary: #007bff !default;
+$primary-bg: #e7f1ff !default;
+$bg-lighter: #f8f9fa !default;
+$transition-base: 0.2s ease-in-out !default;
+$transition-fast: 0.15s ease-in-out !default;
+$shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175) !default;
+
+.overlay {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+
+  @media (max-width: $breakpoint-lg) {
+    display: block;
+  }
+}
+
+// 사이드바 높이 조절 
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 70px;    
+  width: $sidebar-width;
+  height: calc(100vh - #{$header-height});
+  background-color: $white;
+  border-right: $border;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width $transition-base;
+  z-index: $z-sticky;
+
+  @media (max-width: $breakpoint-lg) {
+    transform: translateX(-100%);
+    box-shadow: $shadow-lg;
+    transition: transform $transition-base;
+  }
+
+  &.collapsed {
+    width: $sidebar-width-collapsed;
+
+    .label {
+      display: none;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// ==========================================
+// Navigation
+// ==========================================
+
+.nav {
+  flex: 1;
+  padding: $space-lg $space-sm;
+  overflow-y: auto;
+
+  &Secondary {
+    padding: $space-lg $space-sm;
+    border-top: $border;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  width: 100%;
+  padding: $space-md $space-lg;
+  color: $gray;
+  text-decoration: none;
+  border-radius: $border-radius;
+  transition: all $transition-fast;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    background-color: $primary-bg;
+    color: $primary;
+
+    .icon {
+      color: $primary;
+    }
+  }
+
+  &.active {
+    background-color: $primary-bg;
+    color: $primary;
+    font-weight: $font-weight-semibold;
+
+    .icon {
+      color: $primary;
+    }
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ==========================================
+// Divider
+// ==========================================
+
+.divider {
+  height: $border-width;
+  background-color: $border-color;
+  margin: $space-md 0;
+}
+
+// ==========================================
+// Footer
+// ==========================================
+
+.footer {
+  padding: $space-lg $space-sm;
+  border-top: $border;
+  background-color: $bg-lighter;
+  flex-shrink: 0;
+}
+
+.footerContent {
+  padding: $space-md $space-lg;
+  border-radius: $border-radius;
+  background-color: $white;
+  text-align: center;
+
+  .version {
+    font-size: $font-size-xs;
+    color: $light-gray;
+    margin: 0 0 $space-sm;
+  }
+
+  .helpLink {
+    font-size: $font-size-sm;
+    color: $primary;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity $transition-fast;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ==========================================
+// Scrollbar Styling
+// ==========================================
+
+.nav::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb {
+  background: $light-gray;
+  border-radius: 3px;
+
+  &:hover {
+    background: $gray;
+  }
+}
+
+// ==========================================
+// Mobile Responsive
+// ==========================================
+
+@media (max-width: $breakpoint-lg) {
+  .sidebar {
+    position: fixed;
+    width: $sidebar-width;
+    transform: translateX(-100%);
+    z-index: $z-modal;
+    border-radius: 0;
+    
+    &:not(.collapsed) {
+      transform: translateX(0);
+    }
+  }
+
+  .navItem {
+    position: relative;
+    padding-left: $space-lg;
+  }
+}

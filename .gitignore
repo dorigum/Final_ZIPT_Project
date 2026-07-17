@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/
+.obsidian/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+out/
+bin/
+.gradle/
+
+# Environment / local secrets
+.env
+.env.*
+!.env.example
+*dev.yml
+*local.yml
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Local scratch
+temp/
+test-fixtures/

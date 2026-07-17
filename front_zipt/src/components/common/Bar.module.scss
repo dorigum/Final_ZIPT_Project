@@ -1,0 +1,2 @@
+.track { width: 100%; height: var(--bar-height); overflow: hidden; border-radius: 99px; background: var(--bar-track); }
+.fill { width: var(--bar-value); height: 100%; border-radius: 99px; background: var(--bar-color); transition: width 1s cubic-bezier(.4, 0, .2, 1); }

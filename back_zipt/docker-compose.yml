@@ -1,0 +1,109 @@
+﻿services:
+  # ?? Spring Boot 諛깆뿏????????????????????
+  zipt-backend:
+    image: hyejinworld/zipt-backend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      OAUTH2_REDIRECT_URI: https://zipt.store/oauth/redirect
+      SPRING_DATA_REDIS_HOST: zipt-redis
+    depends_on:
+      zipt-mysql:
+        condition: service_healthy
+      zipt-redis:
+        condition: service_started
+    networks:
+      - zipt-network
+
+  # ?? MySQL 8.0 ????????????????????????????????
+  zipt-mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: zipt
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change-me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me}
+      MYSQL_DATABASE: zipt
+      MYSQL_CHARSET: utf8mb4
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - zipt-network
+    restart: "unless-stopped"
+
+  # ?? Redis 7.2 ????????????????????????????????
+  zipt-redis:
+    image: redis:7.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - zipt-network
+    restart: "unless-stopped"
+
+  # ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧
+  # RAG 媛쒕컻 ?쒖젏??二쇱꽍 ?댁젣
+  # ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧
+
+  zipt-postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: zipt_vector
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - zipt-network
+    restart: "unless-stopped"
+
+  # ?? Prometheus ????????????????????????????????
+  zipt-prometheus:
+    image: prom/prometheus:latest
+    container_name: zipt-prometheus
+    expose:
+      - "9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - zipt-backend
+    networks:
+      - zipt-network
+    restart: unless-stopped
+
+  # ?? Grafana ????????????????????????????????????
+  zipt-grafana:
+    image: grafana/grafana:10.4.0
+    container_name: zipt-grafana
+    ports:
+      - "80:3000"   # ??80 ?ы듃濡?蹂寃?(grafana.zipt.store ?묒냽??
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me}
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - zipt-prometheus
+    networks:
+      - zipt-network
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+  redis-data:
+  pg-data:      # PostgreSQL ?곗씠???곴뎄 ??μ슜 蹂쇰ⅷ
+  grafana-data: # Grafana ??쒕낫???ㅼ젙 ?곴뎄 ???
+
+networks:
+  zipt-network:
+    driver: bridge

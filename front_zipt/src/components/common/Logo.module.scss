@@ -1,0 +1,4 @@
+.logo { display: inline-flex; align-items: center; gap: 9px; }
+.mark { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: var(--logo-size); height: var(--logo-size); border-radius: calc(var(--logo-size) * .28); background: linear-gradient(135deg, var(--primary), var(--navy)); box-shadow: var(--sh-primary); }
+.name { color: var(--logo-color); font-size: calc(var(--logo-size) * .72); font-weight: 800; letter-spacing: -.03em; }
+.dot { color: var(--primary); }

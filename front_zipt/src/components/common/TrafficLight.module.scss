@@ -1,0 +1,25 @@
+.trafficLight { display: inline-flex; align-items: center; gap: 5px; }
+.light {
+  width: var(--light-size);
+  height: var(--light-size);
+  border-radius: 50%;
+  background: var(--light-color);
+  opacity: var(--light-opacity);
+  box-shadow: var(--light-shadow);
+  transition: all .2s;
+}
+
+.activeLight {
+  animation: zipt-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes zipt-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.15);
+  }
+}

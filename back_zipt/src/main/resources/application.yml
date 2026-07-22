@@ -1,9 +1,9 @@
-﻿spring:
+spring:
   application:
     name: back_zipt
   profiles:
-    active: dev          # 濡쒖뺄 媛쒕컻 ??dev / 諛고룷 ??prod濡?蹂寃?/ H2 ?뚯뒪??local
-  #ocr ?뚯씪 ?ш린 ?섎┝
+    active: dev          # 로컬 개발 시 dev / 배포 시 prod로 변경 / H2 테스트 local
+  #ocr 파일 크기 늘림
   config:
     import: "optional:classpath:application-dev.yml"
   servlet:
@@ -23,7 +23,7 @@
         format_sql: true
     show-sql: false
 
-  # pgvector 而ㅼ뒪? vectorstore ?ъ슜???꾪빐 exclude
+  # pgvector 커스텀 vectorstore 사용을 위해 exclude
   autoconfigure:
     exclude:
       - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
@@ -45,7 +45,7 @@ cloud:
     s3:
       bucket-files: ${S3_BUCKET_FILES:zipt-files}
 
-# Actuator 紐⑤땲?곕쭅
+# Actuator 모니터링
 management:
   endpoints:
     web:
@@ -65,32 +65,31 @@ springdoc:
   api-docs:
     path: /api/v3/api-docs
   webjars:
-    prefix: /api/webjars            # UI媛 濡쒕뱶?섎뒗 由ъ냼?ㅻ룄 /api 諛묒쑝濡?
+    prefix: /api/webjars            # UI가 로드하는 리소스도 /api 밑으로
 
-#痢듦컙?뚯쓬
+#층간소음
 #app:
 #  environment:
-#    api-key: ${NOISE_API_KEY:}
-#    api-url: ${NOISE_API_URL:}
+#    api-key: 0b0da12b6428e8730e766b05eb00c721a79dfe5c5b929bec5546f55f521eefab
+#    api-url: /15093156/v1/uddi:8b59bcd7-1c11-47b6-a1a3-905acdc29527
 
 zipt:
   terms:
     s3-key: seed/terms.json
-    admin-token: ${ZIP_ADMIN_TOKEN:change-me}
+    admin-token: ${ZIP_ADMIN_TOKEN:zipt-temp-token-2026}
   guides:
     s3-key: seed/guides.json
     seed-location: classpath:seed/guides.json
-    admin-token: ${ZIP_ADMIN_TOKEN:change-me}
-  # Redis ?ㅼ젙
+    admin-token: ${ZIP_ADMIN_TOKEN:zipt-temp-token-2026}
+  # Redis 설정
   redis:
     cache-database: 1
     blacklist-database: 0
 
-# JWT - 20260629 ?숉쁺 (怨듯넻 yml濡?愿由?- dev, prod)
+# JWT - 20260629 동혁 (공통 yml로 관리 - dev, prod)
 jwt:
-  secret: ${JWT_SECRET:change-me-to-a-long-random-32byte-min-secret}
+  secret: ${JWT_SECRET:rREsXlcKqhtDBG5s2M015wnDs3dWTbL0KXlshU3OHJQ}
   expiration: 720000000
 
-# pool-size ?섎┝
-
+# pool-size 늘림
 

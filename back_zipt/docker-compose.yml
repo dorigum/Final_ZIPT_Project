@@ -1,5 +1,5 @@
-﻿services:
-  # ?? Spring Boot 諛깆뿏????????????????????
+services:
+  # ── Spring Boot 백엔드 ──────────────────
   zipt-backend:
     image: hyejinworld/zipt-backend:latest
     ports:
@@ -16,15 +16,15 @@
     networks:
       - zipt-network
 
-  # ?? MySQL 8.0 ????????????????????????????????
+  # ── MySQL 8.0 ────────────────────────────────
   zipt-mysql:
     image: mysql:8.0
     ports:
       - "3306:3306"
     environment:
       MYSQL_USER: zipt
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change-me}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me}
+      MYSQL_PASSWORD: zipt1234
+      MYSQL_ROOT_PASSWORD: zipt_test_dummy
       MYSQL_DATABASE: zipt
       MYSQL_CHARSET: utf8mb4
     volumes:
@@ -38,7 +38,7 @@
       - zipt-network
     restart: "unless-stopped"
 
-  # ?? Redis 7.2 ????????????????????????????????
+  # ── Redis 7.2 ────────────────────────────────
   zipt-redis:
     image: redis:7.2-alpine
     ports:
@@ -49,9 +49,9 @@
       - zipt-network
     restart: "unless-stopped"
 
-  # ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧
-  # RAG 媛쒕컻 ?쒖젏??二쇱꽍 ?댁젣
-  # ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧
+  # ════════════════════════════════════════════
+  # RAG 개발 시점에 주석 해제
+  # ════════════════════════════════════════════
 
   zipt-postgres:
     image: pgvector/pgvector:pg16
@@ -60,14 +60,14 @@
     environment:
       POSTGRES_DB: zipt_vector
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      POSTGRES_PASSWORD: zipt_test_dummy
     volumes:
       - pg-data:/var/lib/postgresql/data
     networks:
       - zipt-network
     restart: "unless-stopped"
 
-  # ?? Prometheus ????????????????????????????????
+  # ── Prometheus ────────────────────────────────
   zipt-prometheus:
     image: prom/prometheus:latest
     container_name: zipt-prometheus
@@ -81,15 +81,15 @@
       - zipt-network
     restart: unless-stopped
 
-  # ?? Grafana ????????????????????????????????????
+  # ── Grafana ────────────────────────────────────
   zipt-grafana:
     image: grafana/grafana:10.4.0
     container_name: zipt-grafana
     ports:
-      - "80:3000"   # ??80 ?ы듃濡?蹂寃?(grafana.zipt.store ?묒냽??
+      - "80:3000"   # ← 80 포트로 변경 (grafana.zipt.store 접속용)
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me}
+      GF_SECURITY_ADMIN_PASSWORD: zipt1234
     volumes:
       - grafana-data:/var/lib/grafana
     depends_on:
@@ -101,8 +101,8 @@
 volumes:
   mysql-data:
   redis-data:
-  pg-data:      # PostgreSQL ?곗씠???곴뎄 ??μ슜 蹂쇰ⅷ
-  grafana-data: # Grafana ??쒕낫???ㅼ젙 ?곴뎄 ???
+  pg-data:      # PostgreSQL 데이터 영구 저장용 볼륨
+  grafana-data: # Grafana 대시보드 설정 영구 저장
 
 networks:
   zipt-network:

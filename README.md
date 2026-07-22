@@ -72,49 +72,18 @@ flowchart LR
 
 ---
 
-## 📂 프로젝트 구조 (Repository Structure)
+## 📂 5. 프로젝트 상세 문서 (상세 내용 확인)
 
-본 프로젝트는 프론트엔드와 백엔드 및 문서 시스템이 통합 관리되는 모노레포 구조입니다.
+ZIPT 프로젝트는 모든 설계 및 작업 일지를 도큐멘테이션하여 관리하고 있습니다. 아래 링크에서 상세 내용을 확인하실 수 있습니다.
 
-```
-Final_ZIPT_Project/
-├── front_zipt/              # React 프론트엔드 소스 코드
-├── back_zipt/               # Spring Boot 백엔드 API 소스 코드
-└── documents/               # 정제 완료된 표준 문서 및 기록
-    ├── PROJECT_LOG.md       # 메인 문서 통합 인덱스
-    ├── TROUBLESHOOTING.md   # 전체 트러블슈팅 색인 (CORS, Router, DB 동기화 등)
-    ├── project-log/         # 17개의 날짜별 개발 작업 일지
-    ├── info/                # 기획안, PPT 발표 자료, HUG 핵심 용어 사전 정리
-    ├── guides/              # 용어 사전 동기화 가이드, 마이그레이션 가이드
-    └── plan/                # 마이페이지 및 레이아웃 이관 구현 계획서
-```
+- 📝 [PROJECT LOG (전체 문서 통합 인덱스)](documents/PROJECT_LOG.md)
+- 📋 [PROJECT SPECIFICATION (기획안 상세 분석서)](documents/info/프로젝트%20기획.md)
+- 🏗️ [PROJECT PRESENTATION (ZIPT 기획 발표 문서)](documents/info/ZIPT_프로젝트_기획_발표_문서.md)
+- 📐 [IMPLEMENTATION GUIDELINE (기능 구현 가이드라인)](documents/info/🏠도연_프로젝트%20기능%20구현%20가이드라인.md)
+- 🏗️ [INFRA BRIEFING (인프라 구조 브리핑)](documents/info/인프라%20브리핑.md)
+- 🚨 [TROUBLESHOOTING (CORS 및 라우팅 에러 해결 색인)](documents/TROUBLESHOOTING.md)
+- 📋 [INTEGRATION PLAN (마이페이지 연동 구현 계획서)](documents/plan/mypage_contract_integration_plan.md)
+- 🎯 [SYNC GUIDE (용어 사전 동기화 가이드)](documents/guides/term_sync_test_guide.md)
 
 ---
-
-## 🚀 시작하기 (Getting Started)
-
-### Prerequisites
-* Java 17 / Gradle
-* Node.js v18+ / npm or yarn
-* MySQL Database
-
-### 1. Backend 실행
-```bash
-cd back_zipt
-# 환경 변수 및 application.yml 설정 후 기동
-./gradlew bootRun
-```
-
-### 2. Frontend 실행
-```bash
-cd front_zipt
-npm install
-npm run dev
-```
-
----
-
-## 🤝 기여 및 협업 기준
-
-* 모든 문서는 `documents/PROJECT_LOG.md`를 허브로 삼아 연계하며, 날짜별 로그는 `documents/project-log/` 아래에 기록합니다.
-* 개발 및 인프라 관련 트러블슈팅은 `documents/TROUBLESHOOTING.md`에 이슈 발생일과 해결 내역을 인덱싱하여 보관합니다.
+*Updated at_2026.07.23*
